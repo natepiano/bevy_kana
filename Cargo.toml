@@ -8,9 +8,9 @@ repository = "https://github.com/natepiano/bevy_kana"
 version    = "0.0.1"
 
 [features]
-default = ["math", "input"]
-math    = []
+default = ["input", "math"]
 input   = ["dep:bevy_enhanced_input"]
+math    = []
 
 [dependencies]
 bevy = { version = "0.18.1", default-features = false }
