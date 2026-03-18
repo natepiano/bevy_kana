@@ -19,11 +19,13 @@
 //! ```
 
 #[cfg(feature = "input")]
-pub mod input;
+mod input;
 #[cfg(feature = "math")]
 mod math;
 pub mod prelude;
 
+#[cfg(feature = "input")]
+pub use input::Keybindings;
 #[cfg(feature = "math")]
 pub use math::Displacement;
 #[cfg(feature = "math")]

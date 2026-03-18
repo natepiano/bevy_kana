@@ -1,5 +1,7 @@
 #[cfg(feature = "math")]
 pub use crate::Displacement;
+#[cfg(feature = "input")]
+pub use crate::Keybindings;
 #[cfg(feature = "math")]
 pub use crate::Normal;
 #[cfg(feature = "math")]
@@ -12,5 +14,3 @@ pub use crate::ScreenPosition;
 pub use crate::Velocity;
 #[cfg(feature = "math")]
 pub use crate::ZeroLengthError;
-#[cfg(feature = "input")]
-pub use crate::input::Keybindings;
