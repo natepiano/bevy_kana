@@ -1,0 +1,11 @@
+[package]
+authors    = ["natepiano"]
+edition    = "2024"
+homepage   = "https://github.com/natepiano/bevy_kana"
+license    = "MIT OR Apache-2.0"
+name       = "bevy_kana"
+repository = "https://github.com/natepiano/bevy_kana"
+version    = "0.0.1"
+
+[dependencies]
+bevy = { version = "0.18.1", default-features = false }
