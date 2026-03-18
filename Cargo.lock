@@ -185,6 +185,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_enhanced_input"
+version = "0.24.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3f68d3e92cc29743386bba59180747035fef268d222e3d107bcb4540ebf09cac"
+dependencies = [
+ "bevy",
+ "bevy_enhanced_input_macros",
+ "bitflags",
+ "log",
+ "smallvec",
+ "variadics_please",
+]
+
+[[package]]
+name = "bevy_enhanced_input_macros"
+version = "0.24.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "17ee73d4e362e2eb15ac58331c94e5076f6b5065761f008ca7dc930d446d205b"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "bevy_input"
 version = "0.18.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -201,6 +226,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_input_focus"
+version = "0.18.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "08d48a5bceccb9157549a39ab3de4017f5368b65db6471605e9a3f1c19d91bbc"
+dependencies = [
+ "bevy_app",
+ "bevy_ecs",
+ "bevy_input",
+ "bevy_math",
+ "bevy_reflect",
+ "bevy_window",
+ "log",
+ "thiserror 2.0.18",
+]
+
+[[package]]
 name = "bevy_internal"
 version = "0.18.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -212,6 +253,7 @@ dependencies = [
  "bevy_diagnostic",
  "bevy_ecs",
  "bevy_input",
+ "bevy_input_focus",
  "bevy_math",
  "bevy_platform",
  "bevy_ptr",
@@ -227,6 +269,7 @@ name = "bevy_kana"
 version = "0.0.1"
 dependencies = [
  "bevy",
+ "bevy_enhanced_input",
 ]
 
 [[package]]
@@ -376,10 +419,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_window"
+version = "0.18.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6df06e6993a0896bae2fe7644ae6def29a1a92b45dfb1bcebbd92af782be3638"
+dependencies = [
+ "bevy_app",
+ "bevy_ecs",
+ "bevy_input",
+ "bevy_math",
+ "bevy_platform",
+ "bevy_reflect",
+ "log",
+ "raw-window-handle",
+]
+
+[[package]]
 name = "bitflags"
 version = "2.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "843867be96c8daad0d758b57df9392b6d8d271134fce549de6ce169ff98a92af"
+dependencies = [
+ "serde_core",
+]
 
 [[package]]
 name = "bumpalo"
@@ -947,6 +1009,12 @@ dependencies = [
  "num-traits",
  "rand",
 ]
+
+[[package]]
+name = "raw-window-handle"
+version = "0.6.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "20675572f6f24e9e76ef639bc5552774ed45f1c30e2951e1e99c59888861c539"
 
 [[package]]
 name = "rustc_version"

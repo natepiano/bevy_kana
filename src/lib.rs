@@ -1,43 +1,40 @@
 //! # bevy_kana
 //!
-//! Simplified, named wrappers for Bevy.
+//! Simplified, named abstractions for Bevy.
 //!
-//! `bevy_kana` provides zero-cost newtype wrappers around Bevy math primitives
-//! that prevent accidental mixing at compile time. All types are
-//! `#[repr(transparent)]` and `Deref` to their inner type for ergonomic field
-//! and method access.
+//! `bevy_kana` is a growing collection of ergonomic utilities for Bevy projects.
+//! Enable features to pull in what you need.
 //!
-//! ## Type categories
+//! ## Features
 //!
-//! **Semantic types** wrap an inner type with no invariant — they exist to
-//! prevent mixing values that share the same underlying type but carry
-//! different meaning:
+//! - **`math`** (default) — zero-cost newtype wrappers around Bevy math primitives that prevent
+//!   accidental mixing at compile time.
+//! - **`input`** (default) — macros and utilities for wiring keyboard actions to commands through
+//!   `bevy_enhanced_input`.
 //!
-//! - [`Position`] — a point in 3D space (`Vec3`)
-//! - [`Displacement`] — a delta or offset (`Vec3`)
-//! - [`Velocity`] — rate of position change (`Vec3`)
-//! - [`ScreenPosition`] — pixel-space coordinates (`Vec2`)
-//! - [`Orientation`] — a rotation (`Quat`)
+//! Disable defaults to pick only what you need:
 //!
-//! **Invariant types** enforce a property at construction. Arithmetic that
-//! would break the invariant returns the underlying type (type demotion):
-//!
-//! - [`Normal`] — a unit-length surface normal (`Vec3`)
+//! ```toml
+//! bevy_kana = { version = "0.0.1", default-features = false, features = ["math"] }
+//! ```
 
-#[macro_use]
-mod macros;
-mod displacement;
-mod normal;
-mod orientation;
-mod position;
+#[cfg(feature = "input")]
+pub mod input;
+#[cfg(feature = "math")]
+mod math;
 pub mod prelude;
-mod screen_position;
-mod velocity;
 
-pub use displacement::Displacement;
-pub use normal::Normal;
-pub use normal::ZeroLengthError;
-pub use orientation::Orientation;
-pub use position::Position;
-pub use screen_position::ScreenPosition;
-pub use velocity::Velocity;
+#[cfg(feature = "math")]
+pub use math::Displacement;
+#[cfg(feature = "math")]
+pub use math::Normal;
+#[cfg(feature = "math")]
+pub use math::Orientation;
+#[cfg(feature = "math")]
+pub use math::Position;
+#[cfg(feature = "math")]
+pub use math::ScreenPosition;
+#[cfg(feature = "math")]
+pub use math::Velocity;
+#[cfg(feature = "math")]
+pub use math::ZeroLengthError;
