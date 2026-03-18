@@ -1,6 +1,6 @@
 //! # bevy_kana
 //!
-//! Simplified, named abstractions for Bevy.
+//! Ergonomic, opinionated utilities for Bevy — type-safe math, input wiring, and more.
 //!
 //! `bevy_kana` is a growing collection of ergonomic utilities for Bevy projects.
 //! Enable features to pull in what you need.

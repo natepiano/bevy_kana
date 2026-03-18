@@ -4,7 +4,7 @@
 
 # bevy_kana
 
-**Simplified, named abstractions for Bevy**
+**Ergonomic, opinionated utilities for Bevy — type-safe math, input wiring, and more.**
 
 [![CI](https://github.com/natepiano/bevy_kana/actions/workflows/ci.yml/badge.svg)](https://github.com/natepiano/bevy_kana/actions/workflows/ci.yml)
 [![crates.io](https://img.shields.io/crates/v/bevy_kana.svg)](https://crates.io/crates/bevy_kana)
