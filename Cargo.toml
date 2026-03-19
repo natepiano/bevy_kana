@@ -1,14 +1,14 @@
 [package]
-authors    = ["natepiano"]
-edition    = "2024"
-homepage   = "https://github.com/natepiano/bevy_kana"
-license    = "MIT OR Apache-2.0"
-name       = "bevy_kana"
-repository = "https://github.com/natepiano/bevy_kana"
-version     = "0.0.1"
-description = "Ergonomic, opinionated utilities for Bevy — type-safe math, input wiring, and more"
-keywords    = ["bevy", "gamedev", "math", "input", "ecs"]
+authors     = ["natepiano"]
 categories  = ["game-development", "game-engines"]
+description = "Ergonomic, opinionated utilities for Bevy — type-safe math, input wiring, and more"
+edition     = "2024"
+homepage    = "https://github.com/natepiano/bevy_kana"
+keywords    = ["bevy", "ecs", "gamedev", "input", "math"]
+license     = "MIT OR Apache-2.0"
+name        = "bevy_kana"
+repository  = "https://github.com/natepiano/bevy_kana"
+version     = "0.0.1"
 
 [lints.clippy]
 # Our strict lints
