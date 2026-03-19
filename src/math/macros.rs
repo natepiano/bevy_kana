@@ -25,6 +25,11 @@ macro_rules! semantic_newtype {
         pub struct $name(pub $inner);
 
         impl $name {
+            /// Creates a new value from components.
+            pub const fn new(x: f32, y: f32, z: f32) -> Self {
+                Self(<$inner>::new(x, y, z))
+            }
+
             /// Consumes `self` and returns the inner value.
             ///
             /// Use this when you need to pass the raw type to a Bevy API.
