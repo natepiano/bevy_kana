@@ -11,6 +11,14 @@ pub use crate::Position;
 #[cfg(feature = "math")]
 pub use crate::ScreenPosition;
 #[cfg(feature = "math")]
+pub use crate::ToF32;
+#[cfg(feature = "math")]
+pub use crate::ToI32;
+#[cfg(feature = "math")]
+pub use crate::ToU32;
+#[cfg(feature = "math")]
+pub use crate::ToUsize;
+#[cfg(feature = "math")]
 pub use crate::Velocity;
 #[cfg(feature = "math")]
 pub use crate::ZeroLengthError;

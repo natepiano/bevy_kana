@@ -29,18 +29,22 @@ pub struct Orientation(pub Quat);
 
 impl Orientation {
     /// Consumes `self` and returns the inner `Quat`.
+    #[must_use]
     pub const fn into_inner(self) -> Quat { self.0 }
 
     /// Returns the inverse rotation.
+    #[must_use]
     pub fn inverse(self) -> Self { Self(self.0.inverse()) }
 
     /// Spherical linear interpolation between `self` and `other`.
+    #[must_use]
     pub fn slerp(self, other: Self, t: f32) -> Self { Self(self.0.slerp(other.0, t)) }
 
     /// Linear interpolation between `self` and `other`.
     ///
     /// Faster than [`Orientation::slerp`] but less accurate for large
     /// angular differences.
+    #[must_use]
     pub fn lerp(self, other: Self, t: f32) -> Self { Self(self.0.lerp(other.0, t)) }
 }
 
@@ -77,6 +81,7 @@ impl core::ops::Mul<Vec3> for Orientation {
 }
 
 #[cfg(test)]
+#[allow(clippy::float_cmp)]
 mod tests {
     use std::f32::consts::FRAC_PI_2;
 

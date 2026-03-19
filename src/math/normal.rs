@@ -58,8 +58,9 @@ pub struct Normal(Vec3);
 impl Normal {
     /// Creates a `Normal` by normalizing the input vector.
     ///
-    /// Returns `Err(ZeroLengthError)` if the vector has zero length
-    /// (and therefore cannot be normalized).
+    /// # Errors
+    ///
+    /// Returns [`ZeroLengthError`] if `value` has zero length.
     pub fn new(value: Vec3) -> Result<Self, ZeroLengthError> {
         let length = value.length();
         if length == 0.0 {
@@ -76,6 +77,7 @@ impl Normal {
     ///
     /// Use this on hot paths where you know the vector is already normalized
     /// (e.g., it just came out of [`Vec3::normalize`]).
+    #[must_use]
     pub fn new_unchecked(value: Vec3) -> Self {
         debug_assert!(
             (value.length() - 1.0).abs() < UNIT_LENGTH_EPSILON,
@@ -86,6 +88,7 @@ impl Normal {
     }
 
     /// Consumes `self` and returns the inner `Vec3`.
+    #[must_use]
     pub const fn into_inner(self) -> Vec3 { self.0 }
 }
 
@@ -138,6 +141,7 @@ impl core::ops::Neg for Normal {
 }
 
 #[cfg(test)]
+#[allow(clippy::float_cmp, clippy::unwrap_used)]
 mod tests {
     use super::*;
 

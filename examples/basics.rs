@@ -49,15 +49,15 @@ fn main() {
     println!("\n=== Normal: invariant type with demotion ===\n");
 
     // Construction normalizes the input
-    let normal = Normal::new(Vec3::new(1.0, 1.0, 0.0)).expect("non-zero input");
+    let normal = Normal::new_unchecked(Vec3::new(1.0, 1.0, 0.0).normalize());
     println!(
         "Normal from (1,1,0): {normal:?} (length: {})",
         normal.length()
     );
 
     // Arithmetic demotes to Vec3 (sum of normals isn't necessarily unit)
-    let up = Normal::new(Vec3::Y).unwrap();
-    let right = Normal::new(Vec3::X).unwrap();
+    let up = Normal::new_unchecked(Vec3::Y);
+    let right = Normal::new_unchecked(Vec3::X);
     let sum: Vec3 = up + right;
     println!("Normal + Normal = Vec3: {sum:?}");
 

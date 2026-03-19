@@ -291,7 +291,10 @@ mod tests {
     event!(TestPayloadEvent { value: u32 });
 
     #[test]
-    fn unit_event_defaults() { let _event = TestEvent; }
+    fn unit_event_defaults() {
+        let event = TestEvent;
+        assert_eq!(std::mem::size_of_val(&event), 0);
+    }
 
     #[test]
     fn payload_event_fields() {

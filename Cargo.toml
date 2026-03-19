@@ -5,7 +5,29 @@ homepage   = "https://github.com/natepiano/bevy_kana"
 license    = "MIT OR Apache-2.0"
 name       = "bevy_kana"
 repository = "https://github.com/natepiano/bevy_kana"
-version    = "0.0.1"
+version     = "0.0.1"
+description = "Ergonomic, opinionated utilities for Bevy — type-safe math, input wiring, and more"
+keywords    = ["bevy", "gamedev", "math", "input", "ecs"]
+categories  = ["game-development", "game-engines"]
+
+[lints.clippy]
+# Our strict lints
+expect_used = "deny"
+panic       = "deny"
+unwrap_used = "deny"
+
+# Enable lint groups as errors (with lower priority so allows can override)
+all      = { level = "deny", priority = -1 }
+cargo    = { level = "deny", priority = -1 }
+nursery  = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+
+# Allow specific lints that conflict with common patterns
+multiple_crate_versions = "allow"
+needless_pass_by_value  = "allow"
+
+[lints.rust]
+missing_docs = "deny"
 
 [features]
 default = ["input", "math"]

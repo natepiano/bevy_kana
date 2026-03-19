@@ -56,6 +56,28 @@ let centroid = (p1 + p2) / 2.0;
 // let bad = p1 + Velocity(Vec3::X); // ERROR
 ```
 
+### Numeric cast traits
+
+Convenience traits that replace bare `as` casts for common numeric conversions, centralizing the clippy `#[allow]` so call sites stay clean.
+
+| Trait | From | Suppresses |
+|-------|------|------------|
+| `ToF32` | `i32`, `u32`, `usize` | `cast_precision_loss` |
+| `ToI32` | `usize`, `u32`, `f32` | `cast_possible_truncation`, `cast_possible_wrap` |
+| `ToU32` | `usize`, `f32`, `f64` | `cast_possible_truncation`, `cast_sign_loss` |
+| `ToUsize` | `u32`, `f32` | `cast_possible_truncation`, `cast_sign_loss` |
+
+**These conversions are deliberately lossy.** They will silently produce wrong results if the input exceeds the target type's representable range. It is the caller's responsibility to ensure values are in bounds. Typical safe usage: loop indices, mesh vertex counts, and other small geometry values.
+
+```rust
+use bevy_kana::ToF32;
+use bevy_kana::ToU32;
+
+let sides: u32 = 8;
+let angle = (j.to_f32() / sides.to_f32()) * std::f32::consts::TAU;
+let index = positions.len().to_u32();
+```
+
 ### More to come
 
 `bevy_kana` will grow to include other convenience macros and generic utilities that are broadly useful across Bevy projects.

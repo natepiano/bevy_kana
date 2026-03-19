@@ -22,9 +22,11 @@ pub struct ScreenPosition(pub Vec2);
 
 impl ScreenPosition {
     /// Creates a new screen position from x and y pixel coordinates.
+    #[must_use]
     pub const fn new(x: f32, y: f32) -> Self { Self(Vec2::new(x, y)) }
 
     /// Consumes `self` and returns the inner `Vec2`.
+    #[must_use]
     pub const fn into_inner(self) -> Vec2 { self.0 }
 }
 
@@ -89,6 +91,7 @@ impl core::ops::Neg for ScreenPosition {
 }
 
 #[cfg(test)]
+#[allow(clippy::float_cmp)]
 mod tests {
     use super::*;
 

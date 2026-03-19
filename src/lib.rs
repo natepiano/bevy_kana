@@ -1,4 +1,4 @@
-//! # bevy_kana
+//! # `bevy_kana`
 //!
 //! Ergonomic, opinionated utilities for Bevy — type-safe math, input wiring, and more.
 //!
@@ -22,6 +22,7 @@
 mod input;
 #[cfg(feature = "math")]
 mod math;
+/// Convenience re-exports for glob imports.
 pub mod prelude;
 
 #[cfg(feature = "input")]
@@ -36,6 +37,14 @@ pub use math::Orientation;
 pub use math::Position;
 #[cfg(feature = "math")]
 pub use math::ScreenPosition;
+#[cfg(feature = "math")]
+pub use math::ToF32;
+#[cfg(feature = "math")]
+pub use math::ToI32;
+#[cfg(feature = "math")]
+pub use math::ToU32;
+#[cfg(feature = "math")]
+pub use math::ToUsize;
 #[cfg(feature = "math")]
 pub use math::Velocity;
 #[cfg(feature = "math")]
