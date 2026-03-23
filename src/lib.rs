@@ -30,8 +30,6 @@ pub use input::Keybindings;
 #[cfg(feature = "math")]
 pub use math::Displacement;
 #[cfg(feature = "math")]
-pub use math::Normal;
-#[cfg(feature = "math")]
 pub use math::Orientation;
 #[cfg(feature = "math")]
 pub use math::Position;
@@ -47,5 +45,3 @@ pub use math::ToU32;
 pub use math::ToUsize;
 #[cfg(feature = "math")]
 pub use math::Velocity;
-#[cfg(feature = "math")]
-pub use math::ZeroLengthError;

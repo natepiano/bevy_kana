@@ -3,8 +3,6 @@ pub use crate::Displacement;
 #[cfg(feature = "input")]
 pub use crate::Keybindings;
 #[cfg(feature = "math")]
-pub use crate::Normal;
-#[cfg(feature = "math")]
 pub use crate::Orientation;
 #[cfg(feature = "math")]
 pub use crate::Position;
@@ -20,5 +18,3 @@ pub use crate::ToU32;
 pub use crate::ToUsize;
 #[cfg(feature = "math")]
 pub use crate::Velocity;
-#[cfg(feature = "math")]
-pub use crate::ZeroLengthError;

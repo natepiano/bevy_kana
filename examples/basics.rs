@@ -6,7 +6,6 @@ use bevy::math::Quat;
 use bevy::math::Vec2;
 use bevy::math::Vec3;
 use bevy_kana::Displacement;
-use bevy_kana::Normal;
 use bevy_kana::Orientation;
 use bevy_kana::Position;
 use bevy_kana::ScreenPosition;
@@ -45,29 +44,6 @@ fn main() {
     let from_vec: Position = Vec3::new(1.0, 2.0, 3.0).into();
     let back_to_vec: Vec3 = from_vec.into();
     println!("roundtrip: {back_to_vec:?}");
-
-    println!("\n=== Normal: invariant type with demotion ===\n");
-
-    // Construction normalizes the input
-    let normal = Normal::new_unchecked(Vec3::new(1.0, 1.0, 0.0).normalize());
-    println!(
-        "Normal from (1,1,0): {normal:?} (length: {})",
-        normal.length()
-    );
-
-    // Arithmetic demotes to Vec3 (sum of normals isn't necessarily unit)
-    let up = Normal::new_unchecked(Vec3::Y);
-    let right = Normal::new_unchecked(Vec3::X);
-    let sum: Vec3 = up + right;
-    println!("Normal + Normal = Vec3: {sum:?}");
-
-    // Negation preserves the Normal type
-    let down: Normal = -up;
-    println!("Negated up normal: {down:?}");
-
-    // new_unchecked for hot paths (debug_assert validates in dev builds)
-    let from_normalized = Normal::new_unchecked(Vec3::X.normalize());
-    println!("From pre-normalized: {from_normalized:?}");
 
     println!("\n=== Orientation: rotation wrapper ===\n");
 

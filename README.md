@@ -32,7 +32,6 @@ Zero-cost newtype wrappers (`#[repr(transparent)]`) around Bevy's math primitive
 | `Velocity` | `Vec3` | Rate of position change |
 | `ScreenPosition` | `Vec2` | Pixel-space coordinates |
 | `Orientation` | `Quat` | A rotation |
-| `Normal` | `Vec3` | Unit-length surface normal (invariant enforced) |
 
 **Key properties:**
 
