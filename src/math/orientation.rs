@@ -24,7 +24,6 @@ use bevy::reflect::Reflect;
 /// assert!((rotated - Vec3::NEG_Z).length() < 1e-6);
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Default, Reflect)]
-#[repr(transparent)]
 pub struct Orientation(pub Quat);
 
 impl Orientation {

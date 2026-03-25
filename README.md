@@ -27,7 +27,7 @@
 
 ### Semantic math types
 
-Zero-cost newtype wrappers (`#[repr(transparent)]`) around Bevy's math primitives that prevent accidental mixing at compile time.
+Zero-cost newtype wrappers around Bevy's math primitives that prevent accidental mixing at compile time.
 
 | Type | Wraps | Purpose |
 |------|-------|---------|

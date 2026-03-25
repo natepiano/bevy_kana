@@ -1,7 +1,6 @@
 //! Zero-cost newtype wrappers around Bevy math primitives.
 //!
-//! All types are `#[repr(transparent)]` and `Deref` to their inner type
-//! for ergonomic field and method access.
+//! All types `Deref` to their inner type for ergonomic field and method access.
 
 #[macro_use]
 mod macros;

@@ -23,7 +23,6 @@ macro_rules! semantic_newtype {
     ) => {
         $(#[$meta])*
         #[derive(Debug, Clone, Copy, PartialEq, Default, Reflect)]
-        #[repr(transparent)]
         pub struct $name(pub $inner);
 
         impl $name {

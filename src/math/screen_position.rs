@@ -17,7 +17,6 @@ use bevy::reflect::Reflect;
 /// assert_eq!(moved.x, 650.0);
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Default, Reflect)]
-#[repr(transparent)]
 pub struct ScreenPosition(pub Vec2);
 
 impl ScreenPosition {
