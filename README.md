@@ -15,6 +15,10 @@
 
 ---
 
+> **Work in progress.** This crate is in active development (v0.0.1) and not
+> subject to semver stability guarantees. APIs will change without notice
+> between commits. Do not depend on this in production code yet.
+
 **仮名** (*kana*) — from Japanese 仮 (*ka*, "simplified, borrowed") + 名 (*na*, "name, character"). The kana writing systems — hiragana (ひらがな) and katakana (カタカナ) — were born as simplified characters borrowed from complex kanji, making written language more accessible without losing meaning.
 
 `bevy_kana` follows the same philosophy: small, named abstractions borrowed from Bevy's existing types, making game code more expressive and type-safe without adding complexity. It is a growing collection of ergonomic utilities — not limited to any single category.
