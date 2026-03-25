@@ -85,6 +85,12 @@ let index = positions.len().to_u32();
 
 `bevy_kana` will grow to include other convenience macros and generic utilities that are broadly useful across Bevy projects.
 
+## Version Compatibility
+
+| bevy_kana | Bevy |
+|-----------|------|
+| 0.0.1     | 0.18 |
+
 ## Usage
 
 Add to your `Cargo.toml`:
