@@ -30,7 +30,7 @@ needless_pass_by_value  = "allow"
 missing_docs = "deny"
 
 [features]
-default = ["input", "math"]
+default = ["math"]
 input   = ["dep:bevy_enhanced_input"]
 math    = []
 
