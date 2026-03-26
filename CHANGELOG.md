@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `input` feature is no longer a default — libraries only need `math` (the default), binaries opt into `input` explicitly with `features = ["input"]`
+
 ## [0.0.1] - 2026-03-25
 
 ### Added
