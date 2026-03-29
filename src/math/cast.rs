@@ -39,6 +39,11 @@ impl ToF32 for usize {
     fn to_f32(self) -> f32 { self as f32 }
 }
 
+impl ToF32 for f64 {
+    #[allow(clippy::cast_possible_truncation)]
+    fn to_f32(self) -> f32 { self as f32 }
+}
+
 /// Narrowing conversion to `i32`.
 ///
 /// May truncate (`usize`, `f32`) or wrap (`u32` values above `i32::MAX`).
@@ -59,6 +64,11 @@ impl ToI32 for u32 {
 }
 
 impl ToI32 for f32 {
+    #[allow(clippy::cast_possible_truncation)]
+    fn to_i32(self) -> i32 { self as i32 }
+}
+
+impl ToI32 for f64 {
     #[allow(clippy::cast_possible_truncation)]
     fn to_i32(self) -> i32 { self as i32 }
 }
@@ -88,6 +98,11 @@ impl ToU32 for f64 {
     fn to_u32(self) -> u32 { self as u32 }
 }
 
+impl ToU32 for u64 {
+    #[allow(clippy::cast_possible_truncation)]
+    fn to_u32(self) -> u32 { self as u32 }
+}
+
 /// Conversion to `usize`.
 ///
 /// `u32` → `usize` is lossless on 64-bit targets but the trait exists for
@@ -105,4 +120,79 @@ impl ToUsize for u32 {
 impl ToUsize for f32 {
     #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
     fn to_usize(self) -> usize { self as usize }
+}
+
+/// Narrowing conversion to `u8`.
+///
+/// Truncates integers above 255 and discards fractional/negative parts of
+/// floats. The caller must ensure the value is in `[0, 255]`.
+pub trait ToU8 {
+    /// Convert to `u8`, potentially truncating or losing sign.
+    fn to_u8(self) -> u8;
+}
+
+impl ToU8 for f32 {
+    #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+    fn to_u8(self) -> u8 { self as u8 }
+}
+
+impl ToU8 for u32 {
+    #[allow(clippy::cast_possible_truncation)]
+    fn to_u8(self) -> u8 { self as u8 }
+}
+
+impl ToU8 for usize {
+    #[allow(clippy::cast_possible_truncation)]
+    fn to_u8(self) -> u8 { self as u8 }
+}
+
+/// Narrowing conversion to `u16`.
+///
+/// Truncates integers above 65 535 and discards fractional/negative parts of
+/// floats. The caller must ensure the value fits in `u16`'s range.
+pub trait ToU16 {
+    /// Convert to `u16`, potentially truncating or losing sign.
+    fn to_u16(self) -> u16;
+}
+
+impl ToU16 for usize {
+    #[allow(clippy::cast_possible_truncation)]
+    fn to_u16(self) -> u16 { self as u16 }
+}
+
+impl ToU16 for u32 {
+    #[allow(clippy::cast_possible_truncation)]
+    fn to_u16(self) -> u16 { self as u16 }
+}
+
+impl ToU16 for f32 {
+    #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+    fn to_u16(self) -> u16 { self as u16 }
+}
+
+/// Widening conversion to `f64`.
+///
+/// All current impls are lossless or precision-losing only for very large
+/// `usize` values (above 2^53). The caller should be aware that `usize`
+/// values above `f64`'s exact-integer range will silently lose precision.
+pub trait ToF64 {
+    /// Convert to `f64`.
+    fn to_f64(self) -> f64;
+}
+
+impl ToF64 for usize {
+    #[allow(clippy::cast_precision_loss)]
+    fn to_f64(self) -> f64 { self as f64 }
+}
+
+impl ToF64 for u32 {
+    fn to_f64(self) -> f64 { f64::from(self) }
+}
+
+impl ToF64 for i32 {
+    fn to_f64(self) -> f64 { f64::from(self) }
+}
+
+impl ToF64 for f32 {
+    fn to_f64(self) -> f64 { f64::from(self) }
 }

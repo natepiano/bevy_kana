@@ -38,7 +38,13 @@ pub use math::ScreenPosition;
 #[cfg(feature = "math")]
 pub use math::ToF32;
 #[cfg(feature = "math")]
+pub use math::ToF64;
+#[cfg(feature = "math")]
 pub use math::ToI32;
+#[cfg(feature = "math")]
+pub use math::ToU8;
+#[cfg(feature = "math")]
+pub use math::ToU16;
 #[cfg(feature = "math")]
 pub use math::ToU32;
 #[cfg(feature = "math")]

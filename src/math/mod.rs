@@ -12,7 +12,10 @@ mod screen_position;
 mod velocity;
 
 pub use cast::ToF32;
+pub use cast::ToF64;
 pub use cast::ToI32;
+pub use cast::ToU8;
+pub use cast::ToU16;
 pub use cast::ToU32;
 pub use cast::ToUsize;
 pub use displacement::Displacement;
