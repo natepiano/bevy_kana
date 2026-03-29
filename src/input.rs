@@ -170,7 +170,7 @@ pub struct Keybindings<C: Component> {
     all_modifiers:       Vec<Entity>,
     non_shift_modifiers: Vec<Entity>,
     settings:            ActionSettings,
-    _marker:             std::marker::PhantomData<C>,
+    marker:              std::marker::PhantomData<C>,
 }
 
 impl<C: Component> Keybindings<C> {
@@ -233,7 +233,7 @@ impl<C: Component> Keybindings<C> {
             all_modifiers,
             non_shift_modifiers,
             settings,
-            _marker: std::marker::PhantomData,
+            marker: std::marker::PhantomData,
         }
     }
 
