@@ -15,7 +15,7 @@
 
 ---
 
-> **Work in progress.** This crate is in active development (v0.0.2) and not
+> **Work in progress.** This crate is in active development (v0.0.3) and not
 > subject to semver stability guarantees. APIs will change without notice
 > between commits. Do not depend on this in production code yet.
 
@@ -65,10 +65,13 @@ Convenience traits that replace bare `as` casts for common numeric conversions, 
 
 | Trait | From | Suppresses |
 |-------|------|------------|
-| `ToF32` | `i32`, `u32`, `usize` | `cast_precision_loss` |
-| `ToI32` | `usize`, `u32`, `f32` | `cast_possible_truncation`, `cast_possible_wrap` |
-| `ToU32` | `usize`, `f32`, `f64` | `cast_possible_truncation`, `cast_sign_loss` |
+| `ToU8` | `f32`, `u32`, `usize` | `cast_possible_truncation`, `cast_sign_loss` |
+| `ToU16` | `usize`, `u32`, `f32` | `cast_possible_truncation`, `cast_sign_loss` |
+| `ToF32` | `i32`, `u32`, `usize`, `f64` | `cast_precision_loss`, `cast_possible_truncation` |
+| `ToI32` | `usize`, `u32`, `f32`, `f64` | `cast_possible_truncation`, `cast_possible_wrap` |
+| `ToU32` | `usize`, `f32`, `f64`, `u64` | `cast_possible_truncation`, `cast_sign_loss` |
 | `ToUsize` | `u32`, `f32` | `cast_possible_truncation`, `cast_sign_loss` |
+| `ToF64` | `usize`, `u32`, `i32`, `f32` | `cast_precision_loss` |
 
 **These conversions are deliberately lossy.** They will silently produce wrong results if the input exceeds the target type's representable range. It is the caller's responsibility to ensure values are in bounds. Typical safe usage: loop indices, mesh vertex counts, and other small geometry values.
 
@@ -89,7 +92,7 @@ let index = positions.len().to_u32();
 
 | bevy_kana | Bevy |
 |-----------|------|
-| 0.0.1-0.0.2 | 0.18 |
+| 0.0.1-0.0.3 | 0.18 |
 
 ## Usage
 
@@ -97,7 +100,7 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-bevy_kana = "0.0.2"
+bevy_kana = "0.0.3"
 ```
 
 Run the example:
