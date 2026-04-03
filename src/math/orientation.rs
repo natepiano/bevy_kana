@@ -80,7 +80,10 @@ impl core::ops::Mul<Vec3> for Orientation {
 }
 
 #[cfg(test)]
-#[allow(clippy::float_cmp)]
+#[allow(
+    clippy::float_cmp,
+    reason = "exact equality is appropriate for deterministic math tests"
+)]
 mod tests {
     use std::f32::consts::FRAC_PI_2;
 

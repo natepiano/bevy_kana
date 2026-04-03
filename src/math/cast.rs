@@ -25,22 +25,34 @@ pub trait ToF32 {
 }
 
 impl ToF32 for i32 {
-    #[allow(clippy::cast_precision_loss)]
+    #[allow(
+        clippy::cast_precision_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_f32(self) -> f32 { self as f32 }
 }
 
 impl ToF32 for u32 {
-    #[allow(clippy::cast_precision_loss)]
+    #[allow(
+        clippy::cast_precision_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_f32(self) -> f32 { self as f32 }
 }
 
 impl ToF32 for usize {
-    #[allow(clippy::cast_precision_loss)]
+    #[allow(
+        clippy::cast_precision_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_f32(self) -> f32 { self as f32 }
 }
 
 impl ToF32 for f64 {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_f32(self) -> f32 { self as f32 }
 }
 
@@ -54,22 +66,35 @@ pub trait ToI32 {
 }
 
 impl ToI32 for usize {
-    #[allow(clippy::cast_possible_truncation, clippy::cast_possible_wrap)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_i32(self) -> i32 { self as i32 }
 }
 
 impl ToI32 for u32 {
-    #[allow(clippy::cast_possible_wrap)]
+    #[allow(
+        clippy::cast_possible_wrap,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_i32(self) -> i32 { self as i32 }
 }
 
 impl ToI32 for f32 {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_i32(self) -> i32 { self as i32 }
 }
 
 impl ToI32 for f64 {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_i32(self) -> i32 { self as i32 }
 }
 
@@ -84,22 +109,36 @@ pub trait ToU32 {
 }
 
 impl ToU32 for usize {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u32(self) -> u32 { self as u32 }
 }
 
 impl ToU32 for f32 {
-    #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u32(self) -> u32 { self as u32 }
 }
 
 impl ToU32 for f64 {
-    #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u32(self) -> u32 { self as u32 }
 }
 
 impl ToU32 for u64 {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u32(self) -> u32 { self as u32 }
 }
 
@@ -118,7 +157,11 @@ impl ToUsize for u32 {
 }
 
 impl ToUsize for f32 {
-    #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_usize(self) -> usize { self as usize }
 }
 
@@ -132,17 +175,27 @@ pub trait ToU8 {
 }
 
 impl ToU8 for f32 {
-    #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u8(self) -> u8 { self as u8 }
 }
 
 impl ToU8 for u32 {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u8(self) -> u8 { self as u8 }
 }
 
 impl ToU8 for usize {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u8(self) -> u8 { self as u8 }
 }
 
@@ -156,17 +209,27 @@ pub trait ToU16 {
 }
 
 impl ToU16 for usize {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u16(self) -> u16 { self as u16 }
 }
 
 impl ToU16 for u32 {
-    #[allow(clippy::cast_possible_truncation)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u16(self) -> u16 { self as u16 }
 }
 
 impl ToU16 for f32 {
-    #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_u16(self) -> u16 { self as u16 }
 }
 
@@ -181,7 +244,10 @@ pub trait ToF64 {
 }
 
 impl ToF64 for usize {
-    #[allow(clippy::cast_precision_loss)]
+    #[allow(
+        clippy::cast_precision_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
     fn to_f64(self) -> f64 { self as f64 }
 }
 

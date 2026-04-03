@@ -25,7 +25,10 @@ semantic_newtype!(
 );
 
 #[cfg(test)]
-#[allow(clippy::float_cmp)]
+#[allow(
+    clippy::float_cmp,
+    reason = "exact equality is appropriate for deterministic math tests"
+)]
 mod tests {
     use super::*;
 
