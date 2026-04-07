@@ -69,7 +69,7 @@ Convenience traits that replace bare `as` casts for common numeric conversions, 
 | `ToU16` | `usize`, `u32`, `f32` | `cast_possible_truncation`, `cast_sign_loss` |
 | `ToF32` | `i32`, `u32`, `usize`, `f64` | `cast_precision_loss`, `cast_possible_truncation` |
 | `ToI32` | `usize`, `u32`, `f32`, `f64` | `cast_possible_truncation`, `cast_possible_wrap` |
-| `ToU32` | `usize`, `f32`, `f64`, `u64` | `cast_possible_truncation`, `cast_sign_loss` |
+| `ToU32` | `usize`, `i32`, `f32`, `f64`, `u64` | `cast_possible_truncation`, `cast_sign_loss` |
 | `ToUsize` | `u32`, `f32` | `cast_possible_truncation`, `cast_sign_loss` |
 | `ToF64` | `usize`, `u32`, `i32`, `f32`, `u64` | `cast_precision_loss` |
 

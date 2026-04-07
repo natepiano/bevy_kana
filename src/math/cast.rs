@@ -134,6 +134,14 @@ impl ToU32 for f64 {
     fn to_u32(self) -> u32 { self as u32 }
 }
 
+impl ToU32 for i32 {
+    #[allow(
+        clippy::cast_sign_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
+    fn to_u32(self) -> u32 { self as u32 }
+}
+
 impl ToU32 for u64 {
     #[allow(
         clippy::cast_possible_truncation,
