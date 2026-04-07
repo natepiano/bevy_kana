@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `ToF64` impl for `u64`
+
 ## [0.0.3] - 2026-03-29
 
 ### Added
