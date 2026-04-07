@@ -259,6 +259,14 @@ impl ToF64 for i32 {
     fn to_f64(self) -> f64 { f64::from(self) }
 }
 
+impl ToF64 for u64 {
+    #[allow(
+        clippy::cast_precision_loss,
+        reason = "intentionally lossy — callers ensure values are in range"
+    )]
+    fn to_f64(self) -> f64 { self as f64 }
+}
+
 impl ToF64 for f32 {
     fn to_f64(self) -> f64 { f64::from(self) }
 }
