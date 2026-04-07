@@ -15,7 +15,7 @@
 
 ---
 
-> **Work in progress.** This crate is in active development (v0.0.3) and not
+> **Work in progress.** This crate is in active development (v0.0.4) and not
 > subject to semver stability guarantees. APIs will change without notice
 > between commits. Do not depend on this in production code yet.
 
@@ -71,7 +71,7 @@ Convenience traits that replace bare `as` casts for common numeric conversions, 
 | `ToI32` | `usize`, `u32`, `f32`, `f64` | `cast_possible_truncation`, `cast_possible_wrap` |
 | `ToU32` | `usize`, `f32`, `f64`, `u64` | `cast_possible_truncation`, `cast_sign_loss` |
 | `ToUsize` | `u32`, `f32` | `cast_possible_truncation`, `cast_sign_loss` |
-| `ToF64` | `usize`, `u32`, `i32`, `f32` | `cast_precision_loss` |
+| `ToF64` | `usize`, `u32`, `i32`, `f32`, `u64` | `cast_precision_loss` |
 
 **These conversions are deliberately lossy.** They will silently produce wrong results if the input exceeds the target type's representable range. It is the caller's responsibility to ensure values are in bounds. Typical safe usage: loop indices, mesh vertex counts, and other small geometry values.
 
@@ -92,7 +92,7 @@ let index = positions.len().to_u32();
 
 | bevy_kana | Bevy |
 |-----------|------|
-| 0.0.1-0.0.3 | 0.18 |
+| 0.0.1-0.0.4 | 0.18 |
 
 ## Usage
 
@@ -100,7 +100,7 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-bevy_kana = "0.0.3"
+bevy_kana = "0.0.4"
 ```
 
 Run the example:
