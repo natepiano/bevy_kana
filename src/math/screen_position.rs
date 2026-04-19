@@ -20,7 +20,7 @@ use bevy::reflect::Reflect;
 pub struct ScreenPosition(pub Vec2);
 
 impl ScreenPosition {
-    /// Creates a new screen position from x and y pixel coordinates.
+    /// Creates a new screen position from `x` and `y` pixel coordinates.
     #[must_use]
     pub const fn new(x: f32, y: f32) -> Self { Self(Vec2::new(x, y)) }
 
