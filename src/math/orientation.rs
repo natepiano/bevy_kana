@@ -1,3 +1,7 @@
+use std::ops::Deref;
+use std::ops::Mul;
+use std::ops::MulAssign;
+
 use bevy::math::Quat;
 use bevy::math::Vec3;
 use bevy::reflect::Reflect;
@@ -19,8 +23,8 @@ use bevy::reflect::Reflect;
 /// use bevy::math::Vec3;
 /// use bevy_kana::Orientation;
 ///
-/// let rot = Orientation::from(Quat::from_rotation_y(std::f32::consts::FRAC_PI_2));
-/// let rotated = rot * Vec3::X;
+/// let orientation = Orientation::from(Quat::from_rotation_y(std::f32::consts::FRAC_PI_2));
+/// let rotated = orientation * Vec3::X;
 /// assert!((rotated - Vec3::NEG_Z).length() < 1e-6);
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Default, Reflect)]
@@ -47,7 +51,7 @@ impl Orientation {
     pub fn lerp(self, other: Self, t: f32) -> Self { Self(self.0.lerp(other.0, t)) }
 }
 
-impl core::ops::Deref for Orientation {
+impl Deref for Orientation {
     type Target = Quat;
 
     fn deref(&self) -> &Quat { &self.0 }
@@ -62,28 +66,24 @@ impl From<Orientation> for Quat {
 }
 
 /// Rotation composition: applying `rhs` then `self`.
-impl core::ops::Mul for Orientation {
+impl Mul for Orientation {
     type Output = Self;
 
     fn mul(self, rhs: Self) -> Self { Self(self.0 * rhs.0) }
 }
 
-impl core::ops::MulAssign for Orientation {
+impl MulAssign for Orientation {
     fn mul_assign(&mut self, rhs: Self) { self.0 = self.0 * rhs.0; }
 }
 
 /// Rotates a vector by this orientation.
-impl core::ops::Mul<Vec3> for Orientation {
+impl Mul<Vec3> for Orientation {
     type Output = Vec3;
 
     fn mul(self, rhs: Vec3) -> Vec3 { self.0 * rhs }
 }
 
 #[cfg(test)]
-#[allow(
-    clippy::float_cmp,
-    reason = "exact equality is appropriate for deterministic math tests"
-)]
 mod tests {
     use std::f32::consts::FRAC_PI_2;
 
@@ -91,50 +91,50 @@ mod tests {
 
     #[test]
     fn rotation_composition() {
-        let a = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
-        let b = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
-        let composed = a * b;
+        let first_orientation = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
+        let second_orientation = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
+        let composed = first_orientation * second_orientation;
         let result = composed * Vec3::X;
         assert!((result - Vec3::NEG_X).length() < 1e-5);
     }
 
     #[test]
     fn rotate_vector() {
-        let rot = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
-        let result = rot * Vec3::X;
+        let orientation = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
+        let result = orientation * Vec3::X;
         assert!((result - Vec3::NEG_Z).length() < 1e-6);
     }
 
     #[test]
     fn inverse_undoes_rotation() {
-        let rot = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
-        let inv = rot.inverse();
-        let composed = rot * inv;
+        let orientation = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
+        let inverse_orientation = orientation.inverse();
+        let composed = orientation * inverse_orientation;
         let result = composed * Vec3::X;
         assert!((result - Vec3::X).length() < 1e-6);
     }
 
     #[test]
     fn slerp_halfway() {
-        let a = Orientation::from(Quat::IDENTITY);
-        let b = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
-        let mid = a.slerp(b, 0.5);
-        let result = mid * Vec3::X;
+        let start_orientation = Orientation::from(Quat::IDENTITY);
+        let end_orientation = Orientation::from(Quat::from_rotation_y(FRAC_PI_2));
+        let midpoint_orientation = start_orientation.slerp(end_orientation, 0.5);
+        let result = midpoint_orientation * Vec3::X;
         let angle = result.angle_between(Vec3::X);
         assert!((angle - std::f32::consts::FRAC_PI_4).abs() < 1e-5);
     }
 
     #[test]
     fn deref_provides_quat_access() {
-        let rot = Orientation::from(Quat::IDENTITY);
-        assert_eq!(rot.w, 1.0);
+        let orientation = Orientation::from(Quat::IDENTITY);
+        assert!((orientation.w - 1.0).abs() < f32::EPSILON);
     }
 
     #[test]
     fn from_into_roundtrip() {
-        let q = Quat::from_rotation_y(FRAC_PI_2);
-        let o = Orientation::from(q);
-        let back: Quat = o.into();
-        assert_eq!(q, back);
+        let quat = Quat::from_rotation_y(FRAC_PI_2);
+        let orientation = Orientation::from(quat);
+        let back: Quat = orientation.into();
+        assert_eq!(quat, back);
     }
 }

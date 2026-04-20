@@ -15,14 +15,14 @@ fn main() {
     println!("=== Semantic types: compile-time safety ===\n");
 
     // Same-type arithmetic works
-    let p1 = Position(Vec3::new(1.0, 0.0, 0.0));
-    let p2 = Position(Vec3::new(3.0, 4.0, 0.0));
-    let centroid = (p1 + p2) / 2.0;
-    println!("Centroid of {p1:?} and {p2:?}: {centroid:?}");
+    let start_position = Position(Vec3::new(1.0, 0.0, 0.0));
+    let end_position = Position(Vec3::new(3.0, 4.0, 0.0));
+    let centroid = (start_position + end_position) / 2.0;
+    println!("Centroid of {start_position:?} and {end_position:?}: {centroid:?}");
 
     // Cross-type mixing is a compile error — uncomment to see:
-    // let vel = Velocity(Vec3::new(1.0, 0.0, 0.0));
-    // let bad = p1 + vel;  // ERROR: expected `Position`, found `Velocity`
+    // let velocity = Velocity(Vec3::new(1.0, 0.0, 0.0));
+    // let bad = start_position + velocity;  // ERROR: expected `Position`, found `Velocity`
 
     println!("\n=== Deref: transparent access to inner type ===\n");
 
@@ -62,26 +62,26 @@ fn main() {
     println!("Rotation * inverse = identity: {identity_result:?}");
 
     // Interpolation
-    let a = Orientation::from(Quat::IDENTITY);
-    let b = Orientation::from(Quat::from_rotation_y(std::f32::consts::FRAC_PI_2));
-    let halfway = a.slerp(b, 0.5);
+    let start_orientation = Orientation::from(Quat::IDENTITY);
+    let end_orientation = Orientation::from(Quat::from_rotation_y(std::f32::consts::FRAC_PI_2));
+    let halfway = start_orientation.slerp(end_orientation, 0.5);
     let slerp_result = halfway * Vec3::X;
     println!("Slerp halfway (0° to 90°): {slerp_result:?}");
 
     println!("\n=== Displacement and Velocity ===\n");
 
     let displacement = Displacement(Vec3::new(5.0, 0.0, 0.0));
-    let vel = Velocity(Vec3::new(2.0, 0.0, 0.0));
+    let velocity = Velocity(Vec3::new(2.0, 0.0, 0.0));
 
     let total = displacement + displacement;
-    let combined = vel + vel;
+    let combined = velocity + velocity;
     println!("Double displacement: {total:?}");
     println!("Combined velocity: {combined:?}");
 
     // Scale velocity by dt for per-frame movement
     let dt = 0.016;
-    let frame_vel = vel * dt;
-    println!("Velocity * dt({dt}): {frame_vel:?}");
+    let frame_velocity = velocity * dt;
+    println!("Velocity * dt({dt}): {frame_velocity:?}");
 
     println!("\n=== ScreenPosition: 2D pixel-space ===\n");
 

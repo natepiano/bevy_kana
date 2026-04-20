@@ -1,5 +1,17 @@
+use std::ops::Add;
+use std::ops::AddAssign;
+use std::ops::Deref;
+use std::ops::Div;
+use std::ops::DivAssign;
+use std::ops::Mul;
+use std::ops::MulAssign;
+use std::ops::Neg;
+use std::ops::Sub;
+use std::ops::SubAssign;
+
 use bevy::math::Vec3;
 use bevy::reflect::Reflect;
+
 semantic_newtype!(
     /// Rate of position change in 3D space.
     ///
@@ -14,10 +26,10 @@ semantic_newtype!(
     /// use bevy::math::Vec3;
     /// use bevy_kana::Velocity;
     ///
-    /// let vel = Velocity(Vec3::new(10.0, 0.0, 0.0));
+    /// let velocity = Velocity(Vec3::new(10.0, 0.0, 0.0));
     /// let dt = 0.016;
-    /// let frame_vel = vel * dt;
-    /// assert!((frame_vel.x - 0.16).abs() < 1e-6);
+    /// let frame_velocity = velocity * dt;
+    /// assert!((frame_velocity.x - 0.16).abs() < 1e-6);
     /// ```
     Velocity, Vec3
 );
@@ -28,16 +40,16 @@ mod tests {
 
     #[test]
     fn scalar_mul_for_dt() {
-        let vel = Velocity(Vec3::new(10.0, 0.0, 0.0));
-        let frame = vel * 0.016;
-        assert!((frame.x - 0.16).abs() < 1e-6);
+        let velocity = Velocity(Vec3::new(10.0, 0.0, 0.0));
+        let frame_velocity = velocity * 0.016;
+        assert!((frame_velocity.x - 0.16).abs() < 1e-6);
     }
 
     #[test]
     fn add_combines_velocities() {
-        let a = Velocity(Vec3::new(1.0, 0.0, 0.0));
-        let b = Velocity(Vec3::new(0.0, 1.0, 0.0));
-        let combined = a + b;
+        let left_velocity = Velocity(Vec3::new(1.0, 0.0, 0.0));
+        let right_velocity = Velocity(Vec3::new(0.0, 1.0, 0.0));
+        let combined = left_velocity + right_velocity;
         assert_eq!(combined.into_inner(), Vec3::new(1.0, 1.0, 0.0));
     }
 }

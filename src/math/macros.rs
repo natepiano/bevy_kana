@@ -55,7 +55,7 @@ macro_rules! semantic_newtype {
             }
         }
 
-        impl core::ops::Deref for $name {
+        impl Deref for $name {
             type Target = $inner;
 
             fn deref(&self) -> &$inner {
@@ -75,7 +75,7 @@ macro_rules! semantic_newtype {
             }
         }
 
-        impl core::ops::Add for $name {
+        impl Add for $name {
             type Output = Self;
 
             fn add(self, rhs: Self) -> Self {
@@ -83,13 +83,13 @@ macro_rules! semantic_newtype {
             }
         }
 
-        impl core::ops::AddAssign for $name {
+        impl AddAssign for $name {
             fn add_assign(&mut self, rhs: Self) {
                 self.0 += rhs.0;
             }
         }
 
-        impl core::ops::Sub for $name {
+        impl Sub for $name {
             type Output = Self;
 
             fn sub(self, rhs: Self) -> Self {
@@ -97,13 +97,13 @@ macro_rules! semantic_newtype {
             }
         }
 
-        impl core::ops::SubAssign for $name {
+        impl SubAssign for $name {
             fn sub_assign(&mut self, rhs: Self) {
                 self.0 -= rhs.0;
             }
         }
 
-        impl core::ops::Mul<f32> for $name {
+        impl Mul<f32> for $name {
             type Output = Self;
 
             fn mul(self, rhs: f32) -> Self {
@@ -111,13 +111,13 @@ macro_rules! semantic_newtype {
             }
         }
 
-        impl core::ops::MulAssign<f32> for $name {
+        impl MulAssign<f32> for $name {
             fn mul_assign(&mut self, rhs: f32) {
                 self.0 *= rhs;
             }
         }
 
-        impl core::ops::Div<f32> for $name {
+        impl Div<f32> for $name {
             type Output = Self;
 
             fn div(self, rhs: f32) -> Self {
@@ -125,13 +125,13 @@ macro_rules! semantic_newtype {
             }
         }
 
-        impl core::ops::DivAssign<f32> for $name {
+        impl DivAssign<f32> for $name {
             fn div_assign(&mut self, rhs: f32) {
                 self.0 /= rhs;
             }
         }
 
-        impl core::ops::Neg for $name {
+        impl Neg for $name {
             type Output = Self;
 
             fn neg(self) -> Self {
@@ -142,7 +142,7 @@ macro_rules! semantic_newtype {
         // Cross-type arithmetic with raw inner type.
         // Allows natural mixing with raw `Vec3` values from Bevy APIs.
 
-        impl core::ops::Add<$inner> for $name {
+        impl Add<$inner> for $name {
             type Output = Self;
 
             fn add(self, rhs: $inner) -> Self {
@@ -150,13 +150,13 @@ macro_rules! semantic_newtype {
             }
         }
 
-        impl core::ops::AddAssign<$inner> for $name {
+        impl AddAssign<$inner> for $name {
             fn add_assign(&mut self, rhs: $inner) {
                 self.0 += rhs;
             }
         }
 
-        impl core::ops::Sub<$inner> for $name {
+        impl Sub<$inner> for $name {
             type Output = Self;
 
             fn sub(self, rhs: $inner) -> Self {
@@ -164,7 +164,7 @@ macro_rules! semantic_newtype {
             }
         }
 
-        impl core::ops::SubAssign<$inner> for $name {
+        impl SubAssign<$inner> for $name {
             fn sub_assign(&mut self, rhs: $inner) {
                 self.0 -= rhs;
             }

@@ -5,6 +5,8 @@
 //! that handles platform-specific modifier keys (`Cmd` vs `Ctrl`) and
 //! automatic `BlockBy` application.
 
+use std::marker::PhantomData;
+
 use bevy::prelude::*;
 use bevy_enhanced_input::prelude::*;
 
@@ -105,16 +107,16 @@ macro_rules! event {
 /// ```
 #[macro_export]
 macro_rules! bind_action_system {
-    ($app:expr, $action:ty, $event:ty, $command:path) => {
-        $app.add_observer(
-            |_: On<bevy_enhanced_input::action::events::Start<$action>>, mut commands: Commands| {
-                commands.trigger(<$event>::default());
-            },
-        )
-        .add_observer(|_: On<$event>, mut commands: Commands| {
+    ($app:expr, $action:ty, $event:ty, $command:path) => {{
+        use bevy_enhanced_input::action::events::Start;
+
+        $app.add_observer(|_start: On<Start<$action>>, mut commands: Commands| {
+            commands.trigger(<$event>::default());
+        })
+        .add_observer(|_event: On<$event>, mut commands: Commands| {
             commands.run_system_cached($command);
         })
-    };
+    }};
 }
 
 /// Non-consuming modifier action for `Cmd` (macOS) / `Ctrl` (other platforms).
@@ -131,6 +133,26 @@ struct AltModifier;
 #[derive(InputAction)]
 #[action_output(bool)]
 struct ControlModifier;
+
+#[derive(Clone, Copy)]
+enum PlatformShortcutMode {
+    Command,
+    Control,
+}
+
+impl PlatformShortcutMode {
+    const fn current() -> Self {
+        if cfg!(target_os = "macos") {
+            Self::Command
+        } else {
+            Self::Control
+        }
+    }
+
+    const fn has_distinct_control_modifier(self) -> bool { matches!(self, Self::Command) }
+}
+
+const PLATFORM_SHORTCUT_MODE: PlatformShortcutMode = PlatformShortcutMode::current();
 
 /// Modifier-aware keybinding builder with platform-specific `Cmd`/`Ctrl` handling.
 ///
@@ -170,7 +192,7 @@ pub struct Keybindings<C: Component> {
     all_modifiers:       Vec<Entity>,
     non_shift_modifiers: Vec<Entity>,
     action_settings:     ActionSettings,
-    phantom_data:        std::marker::PhantomData<C>,
+    phantom_data:        PhantomData<C>,
 }
 
 impl<C: Component> Keybindings<C> {
@@ -188,10 +210,11 @@ impl<C: Component> Keybindings<C> {
             require_reset: true,
             ..default()
         };
-        let primary_modifier_bindings = if cfg!(target_os = "macos") {
-            bindings![KeyCode::SuperLeft, KeyCode::SuperRight]
-        } else {
-            bindings![KeyCode::ControlLeft, KeyCode::ControlRight]
+        let primary_modifier_bindings = match PLATFORM_SHORTCUT_MODE {
+            PlatformShortcutMode::Command => bindings![KeyCode::SuperLeft, KeyCode::SuperRight],
+            PlatformShortcutMode::Control => {
+                bindings![KeyCode::ControlLeft, KeyCode::ControlRight]
+            },
         };
 
         let shift = spawner
@@ -220,7 +243,7 @@ impl<C: Component> Keybindings<C> {
         let mut non_shift_modifiers = vec![primary, alt];
 
         // On macOS, `Ctrl` is a separate physical key from `Cmd`, so block it too.
-        if cfg!(target_os = "macos") {
+        if PLATFORM_SHORTCUT_MODE.has_distinct_control_modifier() {
             let ctrl = spawner
                 .spawn((
                     Action::<ControlModifier>::new(),
@@ -236,7 +259,7 @@ impl<C: Component> Keybindings<C> {
             all_modifiers,
             non_shift_modifiers,
             action_settings,
-            phantom_data: std::marker::PhantomData,
+            phantom_data: PhantomData,
         }
     }
 
@@ -277,10 +300,9 @@ impl<C: Component> Keybindings<C> {
     /// Spawns an action with the platform `Cmd`/`Ctrl` modifier. No `BlockBy`
     /// is needed because the modifier key itself is the disambiguator.
     pub fn spawn_platform_key<A: InputAction>(&self, spawner: &mut ActionSpawner<C>, key: KeyCode) {
-        let platform_bindings = if cfg!(target_os = "macos") {
-            bindings![key.with_mod_keys(ModKeys::SUPER)]
-        } else {
-            bindings![key.with_mod_keys(ModKeys::CONTROL)]
+        let platform_bindings = match PLATFORM_SHORTCUT_MODE {
+            PlatformShortcutMode::Command => bindings![key.with_mod_keys(ModKeys::SUPER)],
+            PlatformShortcutMode::Control => bindings![key.with_mod_keys(ModKeys::CONTROL)],
         };
         spawner.spawn((Action::<A>::new(), self.action_settings, platform_bindings));
     }

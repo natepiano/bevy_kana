@@ -1,5 +1,17 @@
+use std::ops::Add;
+use std::ops::AddAssign;
+use std::ops::Deref;
+use std::ops::Div;
+use std::ops::DivAssign;
+use std::ops::Mul;
+use std::ops::MulAssign;
+use std::ops::Neg;
+use std::ops::Sub;
+use std::ops::SubAssign;
+
 use bevy::math::Vec3;
 use bevy::reflect::Reflect;
+
 semantic_newtype!(
     /// A delta or offset in 3D space.
     ///
@@ -27,17 +39,17 @@ mod tests {
 
     #[test]
     fn add_returns_self() {
-        let a = Displacement(Vec3::new(1.0, 0.0, 0.0));
-        let b = Displacement(Vec3::new(0.0, 1.0, 0.0));
-        let result = a + b;
+        let left_displacement = Displacement(Vec3::new(1.0, 0.0, 0.0));
+        let right_displacement = Displacement(Vec3::new(0.0, 1.0, 0.0));
+        let result = left_displacement + right_displacement;
         assert_eq!(result.into_inner(), Vec3::new(1.0, 1.0, 0.0));
     }
 
     #[test]
     fn from_into_roundtrip() {
-        let v = Vec3::new(1.0, 2.0, 3.0);
-        let d = Displacement::from(v);
-        let back: Vec3 = d.into();
-        assert_eq!(v, back);
+        let vec3 = Vec3::new(1.0, 2.0, 3.0);
+        let displacement = Displacement::from(vec3);
+        let back: Vec3 = displacement.into();
+        assert_eq!(vec3, back);
     }
 }

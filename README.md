@@ -49,14 +49,14 @@ use bevy::math::Vec3;
 use bevy_kana::Position;
 use bevy_kana::Velocity;
 
-let p1 = Position(Vec3::new(1.0, 0.0, 0.0));
-let p2 = Position(Vec3::new(3.0, 0.0, 0.0));
+let start_position = Position(Vec3::new(1.0, 0.0, 0.0));
+let end_position = Position(Vec3::new(3.0, 0.0, 0.0));
 
 // Same-type arithmetic works
-let centroid = (p1 + p2) / 2.0;
+let centroid = (start_position + end_position) / 2.0;
 
 // Cross-type mixing is a compile error
-// let bad = p1 + Velocity(Vec3::X); // ERROR
+// let bad = start_position + Velocity(Vec3::X); // ERROR
 ```
 
 ### Numeric cast traits
