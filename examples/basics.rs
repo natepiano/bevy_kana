@@ -78,10 +78,10 @@ fn main() {
     println!("Double displacement: {total:?}");
     println!("Combined velocity: {combined:?}");
 
-    // Scale velocity by dt for per-frame movement
-    let dt = 0.016;
-    let frame_velocity = velocity * dt;
-    println!("Velocity * dt({dt}): {frame_velocity:?}");
+    // Scale velocity by the frame time delta for per-frame movement
+    let time_delta = 0.016;
+    let frame_velocity = velocity * time_delta;
+    println!("Velocity * time_delta({time_delta}): {frame_velocity:?}");
 
     println!("\n=== ScreenPosition: 2D pixel-space ===\n");
 

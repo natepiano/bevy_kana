@@ -5,11 +5,8 @@
 #[macro_use]
 mod macros;
 mod cast;
-mod displacement;
-mod orientation;
-mod position;
-mod screen_position;
-mod velocity;
+mod screen;
+mod space;
 
 pub use cast::ToF32;
 pub use cast::ToF64;
@@ -18,8 +15,8 @@ pub use cast::ToU8;
 pub use cast::ToU16;
 pub use cast::ToU32;
 pub use cast::ToUsize;
-pub use displacement::Displacement;
-pub use orientation::Orientation;
-pub use position::Position;
-pub use screen_position::ScreenPosition;
-pub use velocity::Velocity;
+pub use screen::ScreenPosition;
+pub use space::Displacement;
+pub use space::Orientation;
+pub use space::Position;
+pub use space::Velocity;
