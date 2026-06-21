@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> **This repository has moved.** `bevy_kana` now lives in the `bevy_hana` workspace at
+> [`bevy_hana/crates/bevy_kana/`](https://github.com/natepiano/hana/tree/main/crates/bevy_kana).
+> This standalone repository is archived and no longer maintained; future development happens there.
+
 <div align="center">
 
 <img src="assets/kana.svg" alt="仮名" width="260"/>
