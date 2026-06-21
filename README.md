@@ -3,7 +3,3 @@
 This repository has moved into the **hana** monorepo:
 
 ➡️ **https://github.com/natepiano/hana/tree/main/crates/bevy_kana**
-
-`bevy_kana` is now developed and published from there. This standalone
-repository is **archived and read-only**; its former contents remain in the
-git history.
